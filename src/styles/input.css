@@ -1,0 +1,225 @@
+@import "tailwindcss" source(none);
+
+/* Source discovery is explicit AND exhaustive, so the gate below can never
+   drift from what the build actually compiled. `source(none)` disables
+   Tailwind v4's automatic detection: without it the scanner sweeps every
+   non-gitignored file under apps/website — including these scripts and any
+   prose that happens to look like a utility (e.g. the word `relative` in a
+   docstring), which silently emitted a `.relative` rule that no page uses.
+   These globs are the whole surface: Astro pages/layouts + the inline
+   scripts' className assignments. */
+@source '../**/*.astro';
+@source '../../public/js/*.js';
+
+/* Brand tokens — values transcribed from the v3 theme that produced the
+   previous hand-maintained public/style.css (bg-brand-accent = rgb(15 110 86),
+   etc), so regenerated utilities render identical colors. */
+@theme {
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: "Source Serif 4", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-ink: #101719;
+  --color-body: #334247;
+  --color-secondary: #526b78;
+  --color-rule: #d6dee1;
+  --color-canvas: #f7f9fa;
+  --color-surface: #ffffff;
+  --color-surface-muted: #eef3f4;
+  --color-brand-accent: #0f6e56;
+  --color-brand-accent-reverse: #34d399;
+  --color-brand-deep: #12343b;
+  --color-state-pass: #1f7a4d;
+  --color-state-fail: #b42318;
+  --color-state-warn: #9a6700;
+
+  --radius-card: 8px;
+}
+
+/* v3 `aria-selected:` variant used the [aria-selected=true] attribute selector;
+   v4's built-in one is :where([aria-selected="true"]) with a quoted value.
+   Defined as our own so both page spellings resolve. */
+@custom-variants aria-selected {
+  &[aria-selected="true"],
+  &[aria-selected=true] {
+    @slot;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Custom CSS retained from the hand-maintained style.css
+   (commit 987cb6f era). Only what the pages actually reference survives.
+   --------------------------------------------------------------------------- */
+
+/* Q8 (#2525): skip link — visually hidden until focused, then pinned top-left
+   over the page. BaseLayout emits <a class="skip-link" href="#main">. */
+.skip-link {
+  position: absolute;
+  left: 0.75rem;
+  top: 0.75rem;
+  z-index: 50;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  background-color: var(--color-brand-accent);
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transform: translateY(-200%);
+  transition: transform 0.15s ease-out;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+/* W6 (#2525): the no-JS notice inside the contact form. It is visible by
+   default (no-JS is exactly when it matters); contact-form.js hides it once
+   the enhancement is active. The `hidden` attribute is what the script uses,
+   so nothing extra is needed here beyond keeping it non-`display`-locked. */
+.no-js {
+  border: 1px solid var(--color-rule);
+  border-radius: 6px;
+  background-color: var(--color-surface-muted);
+  padding: 0.75rem 1rem;
+}
+
+.no-js[hidden] {
+  display: none;
+}
+
+/* W6.1 remediation (#2936): static no-JS result blocks. The handler's 303
+   lands the visitor back here with #form-status=<ok|duplicate|error>; a HTML
+   fragment anchor matches the element whose id is exactly that string, so
+   :target alone reveals the right block with zero JavaScript. Hidden by
+   default; only the targeted block displays. The JS path leaves the hash in
+   place, so a JS visitor returning to the URL sees the same honest text in
+   both renderers. */
+.form-result {
+  display: none;
+}
+
+.form-result:target {
+  border: 1px solid var(--color-rule);
+  border-radius: 6px;
+  background-color: var(--color-surface-muted);
+  padding: 0.75rem 1rem;
+  display: block;
+}
+
+.form-result:target.text-red-600 {
+  background-color: transparent;
+  border-color: var(--color-state-fail);
+}
+
+.heading-underline {
+  display: block;
+  margin-top: 0.25rem;
+  height: 2px;
+  background-color: #0f6e56;
+  width: 2.5em;
+  border-radius: 1px;
+}
+
+/* Mobile nav disclosure: the <summary> is styled as the 44px menu button, so the
+   UA marker must go in both engines. */
+.mobile-nav-summary {
+  display: block;
+  list-style: none;
+}
+.mobile-nav-summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Content container used by the pages (was a hand-written component class). */
+@utility container-content {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  @media (width >= 640px) {
+    padding-inline: 2rem;
+  }
+}
+
+/* Motion: reduced-motion floor + the data-reveal/trace/chip animations.
+   Anchored to the attribute selectors in the markup, not to utility classes. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@keyframes calm-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes trace-draw {
+  0% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes chip-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes chip-out {
+  0%,
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    animation: 0.5s cubic-bezier(0.22, 1, 0.36, 1) both calm-reveal;
+  }
+  [data-trace] {
+    transform-origin: top;
+    animation: 0.7s ease-out 0.15s both trace-draw;
+    transform: scaleY(0);
+  }
+  [data-chip="assuring"] {
+    animation: 1.8s ease-out both chip-out;
+  }
+  [data-chip="assured"] {
+    opacity: 0;
+    animation: 0.45s ease-out 1.5s both chip-in;
+  }
+}
+
+/* Dashboard component styles (Issue #2571): the compliance dashboard no longer
+   ships its own CSS layer — its rules live here and compile into the same
+   committed artifact, scoped by [data-surface="dashboard"] where they could
+   otherwise leak onto website pages. Last import so its @layer components
+   rules land after the utilities' layer declaration order (v4 layer order is
+   fixed by tailwindcss's own @layer statement, not by import position). */
+@import "./dashboard.css";

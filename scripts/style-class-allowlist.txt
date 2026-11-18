@@ -1,0 +1,12 @@
+# Class-coverage allowlist for apps/website/scripts/style-class-coverage.py
+#
+# Tokens listed here are referenced by scanned sources but are exempt from the
+# "must exist in public/style.css" rule. Every entry needs a reason. Keep this
+# list for utilities that exist only so a selector can be emitted, never to
+# paper over a missing build step.
+
+# The contact form's JS reassigns statusEl.className to one of these strings in
+# public/js/contact-form.js and is covered by the className scan; the entries
+# below exist because Tailwind's v4 output escapes `/` in selectors and we want
+# the gate to stay strict, so anything NOT generated must fail loudly instead.
+# (No exemptions required as of Issue #1660; add lines below if one is needed.)

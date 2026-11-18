@@ -1,0 +1,422 @@
+/* Compliance-dashboard component styles (Issue #2571).
+
+   Migrated verbatim from the dashboard's hand-maintained `_STYLE` f-string in
+   apps/compliance-dashboard/compliance_dashboard/ui.py so that BOTH surfaces —
+   website and dashboard — are served from the one compiled artifact
+   (apps/website/public/style.css). The dashboard loads this file's compiled
+   output; it no longer ships its own CSS layer.
+
+   Scoping rules (#2571 design decision A):
+   * Class-based rules stay unscoped: the class-coverage gate
+     (scripts/style-class-coverage.py) proves the website pages never emit
+     these class tokens, and they live in @layer components so any same-named
+     Tailwind utility (utilities layer) still outranks them on website pages.
+   * Element-level rules (body, headings, p, ul/li, table/th/td, a, code,
+     focus outlines) ARE scoped to `[data-surface="dashboard"]` (the attribute
+     ui._head() puts on <body>), so Tailwind's preflight — which now applies to
+     the dashboard too — is re-asserted back to UA defaults only inside the
+     dashboard, never on website pages.
+   * The one class token shared with website markup, `.grid` (display:
+     grid utility), is scoped: the dashboard no longer emits a bare `grid`
+     class, but the legacy rules are kept for reversibility, dashboard-only.
+
+   The design tokens (:root custom properties) are NOT restated here: they
+   come from the website @theme in input.css — the same values the dashboard's
+   token block carried (Issue #2524's drift test binds them). */
+
+@layer components {
+  /* Root surface: the dashboard's body (tagged data-surface="dashboard"). */
+  [data-surface='dashboard'] {
+    font-family: var(--font-sans);
+    margin: 0;
+    background: var(--color-canvas);
+    color: var(--color-body);
+    line-height: 1.5;
+  }
+
+  /* Preflight re-assertions (UA values preflight strips), scoped so website
+     pages are unaffected. :where() keeps class-based rules below winning on
+     the same properties. */
+  :where([data-surface='dashboard']) p {
+    margin: 1em 0;
+  }
+  :where([data-surface='dashboard']) :is(h3, h4) {
+    font-weight: bold;
+  }
+  :where([data-surface='dashboard']) h3 {
+    font-size: 1.17em;
+  }
+  :where([data-surface='dashboard']) ul,
+  :where([data-surface='dashboard']) ol {
+    list-style: disc;
+    padding-left: 40px;
+    margin: 1em 0;
+  }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 20px 16px 56px;
+  }
+  /* Topbar links are solid light-on-dark — no opacity fade (vision pass N1:
+     white at opacity .9 on the old dark read 1.85:1; computed here 13.3:1,
+     bound by tests/test_polish_2524.py). */
+  header.topbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--color-brand-deep);
+    color: var(--color-surface);
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  header.topbar .brand {
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.02em;
+  }
+  header.topbar nav {
+    margin-left: auto;
+    font-size: 0.9rem;
+  }
+  header.topbar nav a {
+    color: var(--color-surface);
+  }
+  [data-surface='dashboard'] h1 {
+    color: var(--color-ink);
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 0 4px;
+  }
+  [data-surface='dashboard'] h2 {
+    color: var(--color-brand-deep);
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0 0 10px;
+  }
+  .sub {
+    color: var(--color-secondary);
+    font-size: 0.9rem;
+    margin: 0 0 18px;
+  }
+  .scorecard {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-card);
+    padding: 18px;
+    margin-bottom: 16px;
+  }
+  .score {
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--color-brand-accent);
+  }
+  .scorecard .label {
+    font-size: 0.85rem;
+    color: var(--color-secondary);
+  }
+  /* Legacy two-column grid — the dashboard markup no longer emits a bare
+     `grid` class, and the selector is scoped because website pages DO use the
+     Tailwind `grid` utility (#2571). */
+  [data-surface='dashboard'] .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  [data-surface='dashboard'] .grid > .card {
+    min-width: 0;
+  }
+  /* Home hierarchy (#2526 T1, vision pass D9): the home is banded — a hero
+     score card, one full-width primary breakdown, then a quiet status row.
+     Deliberately unequal weights, not five interchangeable cards. */
+  .scorecard.hero {
+    padding: 26px;
+    border-left: 4px solid var(--color-brand-accent);
+  }
+  .scorecard.hero .score {
+    font-size: 3rem;
+  }
+  /* Band rules carry BOTH classes (.card.card-*) on purpose: equal
+     specificity with the base .card rule below is a source-order trap — the
+     base .card declaration block sits later and would silently win, making
+     the de-weighting never render (Gus FAIL a9c39590). The compound
+     selectors win regardless of ordering; test_polish_2526 pins it. */
+  .card.card-primary {
+    padding: 20px;
+  }
+  .grid-status {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .card.card-secondary {
+    background: var(--color-surface-muted);
+    padding: 14px 16px;
+  }
+  .card.card-secondary h2 {
+    font-size: 0.9rem;
+    color: var(--color-secondary);
+    margin: 0 0 8px;
+  }
+  /* Mobile collapse lives AFTER the band rules it overrides: an earlier
+     @media block ties on specificity and loses in source order, so the
+     status row rendered 3 cramped columns at 375px (seen in the #2526 fix
+     renders). */
+  @media (max-width: 720px) {
+    [data-surface='dashboard'] .grid {
+      grid-template-columns: 1fr;
+    }
+    .scorecard {
+      flex-direction: column;
+    }
+    .grid-status {
+      grid-template-columns: 1fr;
+    }
+  }
+  /* Q2 (#2526, audit D4): visible keyboard focus, 2px accent ring. The
+     topbar inverts to the reverse accent so the ring survives dark-on-dark. */
+  [data-surface='dashboard'] :is(a, button, input, select, textarea, summary, details):focus-visible {
+    outline: 2px solid var(--color-brand-accent);
+    outline-offset: 2px;
+  }
+  header.topbar a:focus-visible {
+    outline-color: var(--color-brand-accent-reverse);
+  }
+  .card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-card);
+    padding: 16px;
+  }
+  [data-surface='dashboard'] table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  [data-surface='dashboard'] :is(th, td) {
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-rule);
+    font-size: 0.92rem;
+  }
+  [data-surface='dashboard'] th {
+    background: var(--color-surface-muted);
+    font-weight: 600;
+  }
+  [data-surface='dashboard'] a {
+    color: var(--color-brand-accent);
+    text-decoration: none;
+  }
+  [data-surface='dashboard'] a:hover {
+    text-decoration: underline;
+  }
+  /* Wide tables scroll inside their card instead of dragging the whole page
+     sideways at phone widths (vision pass N2: dash home 645px, review 827px
+     intrinsic min-widths). */
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .table-wrap table {
+    min-width: 640px;
+  }
+  /* Issue #2781 M1: at or below 640px the forced floor buys nothing and
+     squeezes the fold-edge column (measured, seam-metrics.jsonl: at 375 the
+     table shrinks 640→595 with the clip unchanged; at 640 dropping it brings
+     the Score column in-fold). Let the table use its intrinsic width there —
+     the wrapper still scrolls, the page still never pans sideways. Above
+     640px the floor stays, which is where it prevents squishing. */
+  @media (max-width: 640px) {
+    .table-wrap table {
+      min-width: 0;
+    }
+  }
+  .pill {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    background: var(--color-surface-muted);
+    color: var(--color-brand-accent);
+  }
+  .pill.ready {
+    color: var(--color-state-pass);
+  }
+  .pill.gap {
+    color: var(--color-state-fail);
+  }
+  .pill.pending {
+    color: var(--color-state-warn);
+  }
+  /* Q5 (#2526, audit D2): .pill.muted was emitted by the builder (recommended
+     obligations, beta confidence) but never defined — it rendered as the
+     default green pill. Now its own neutral register. */
+  .pill.muted {
+    background: var(--color-surface-muted);
+    color: var(--color-secondary);
+  }
+  .ready {
+    color: var(--color-state-pass);
+  }
+  .empty {
+    color: var(--color-secondary);
+    font-style: italic;
+    font-size: 0.9rem;
+  }
+  .muted {
+    color: var(--color-secondary);
+    font-size: 0.85rem;
+  }
+  /* T3 (#2550, audit D8): screen-reader-only text — table captions carry the
+     accessible structure without any visual change (absolute so a <caption>
+     reserves no layout space). */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .flag {
+    color: var(--color-state-fail);
+    font-size: 0.82rem;
+    margin-top: 8px;
+  }
+  [data-surface='dashboard'] code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+  }
+  ul.req {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  ul.req li {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-rule);
+  }
+  /* The builder's "What to include" disclosure carries class='hint' with no
+     bespoke styling (native summary renders); the selector exists so the
+     class-coverage gate sees the token (#2571). */
+  .hint {
+    font-size: inherit;
+  }
+  .control {
+    margin-top: 6px;
+    font-size: 0.9rem;
+  }
+  .breadcrumb {
+    font-size: 0.85rem;
+    color: var(--color-secondary);
+    margin-bottom: 12px;
+  }
+  .breadcrumb a {
+    color: var(--color-brand-accent);
+  }
+  .banner {
+    padding: 10px 14px;
+    border-radius: var(--radius-card);
+    margin: 0 0 16px;
+    font-size: 0.92rem;
+    border: 1px solid var(--color-rule);
+  }
+  .banner.ok {
+    background: var(--color-surface-muted);
+    border-color: var(--color-state-pass);
+    color: var(--color-ink);
+  }
+  .banner.err {
+    background: #f8eae9;
+    border-color: var(--color-state-fail);
+    color: var(--color-ink);
+  }
+  /* Dashboard-side warn banner (Issue #2588): the pre-submit completeness
+     warning emitted by ui.missing_keys_warning. Mirrors .banner.err's shape;
+     the old Python palette carried this rule and the #2571 move dropped it
+     when only ok/err were ported. */
+  .banner.warn {
+    background: #fff8e6;
+    border-color: var(--color-state-warn);
+    color: var(--color-ink);
+  }
+  form.ev {
+    margin: 8px 0 2px;
+    padding: 10px;
+    background: var(--color-surface-muted);
+    border: 1px solid var(--color-rule);
+    border-radius: var(--radius-card);
+  }
+  form.ev .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  form.ev label {
+    font-size: 0.8rem;
+    color: var(--color-secondary);
+  }
+  /* T2 (#2550, audit D5/§5.2): visible inputs and buttons meet the 44px
+     comfortable-target floor. Hidden inputs are excluded by [type=hidden]
+     (they have no box, but min-height must not tempt one). Radio/checkbox
+     glyphs keep their native size — their target is the wrapping <label>
+     row, padded to 44px below. */
+  form.ev input:not([type='hidden']):not([type='radio']):not([type='checkbox']),
+  form.ev select,
+  form.ev textarea {
+    font: inherit;
+    font-size: 0.85rem;
+    min-height: 44px;
+    padding: 8px 10px;
+    border: 1px solid var(--color-rule);
+    border-radius: 6px;
+    background: var(--color-surface);
+    color: var(--color-ink);
+  }
+  form.ev input[type='file'] {
+    padding: 8px;
+  }
+  form.ev textarea {
+    width: 100%;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+  form.ev button {
+    background: var(--color-brand-accent);
+    color: var(--color-surface);
+    border: 0;
+    border-radius: 6px;
+    min-height: 44px;
+    padding: 10px 16px;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+  form.ev .row {
+    min-height: 44px;
+  }
+  form.ev .row label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 44px;
+    padding: 0 4px;
+    cursor: pointer;
+  }
+  form.ev .who {
+    font-size: 0.8rem;
+    color: var(--color-brand-deep);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+}

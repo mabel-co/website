@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import AssuranceMark from '../../components/AssuranceMark.astro';
+---
+
+<BaseLayout title="Continuum pricing — proposed tiers" description="Proposed Continuum pricing tiers. Pricing is being finalised — these figures are directional proposals, not an offer. Tiers, systems, and regulations vary." canonical="https://www.assurer.ai/continuum/pricing">
+
+  <!-- Navigation (R1: inherits DEFAULT_LINKS) -->
+  <SiteHeader />
+
+  <main id="main" tabindex="-1" class="flex flex-1 flex-col focus:outline-none">
+
+    <!-- Hero -->
+    <section data-reveal class="container-content py-20 sm:py-32">
+      <div class="flex flex-col items-center gap-10 sm:flex-row sm:items-start sm:justify-between">
+        <div class="max-w-2xl">
+          <p class="font-mono uppercase tracking-wider text-brand-accent">Continuum</p>
+          <h1 class="mt-4 max-w-3xl text-balance leading-tight text-[clamp(1.75rem,7.5vw,3rem)]">Continuum pricing</h1>
+          <p class="mt-6 max-w-2xl text-body leading-relaxed">Pricing is being finalised. The tier structure is an open decision (D1) and the figures below are directional proposals, not an offer — this page will be updated when the tiers are confirmed.</p>
+        </div>
+        <!-- §3.7G anchor: brand punctuation, not a product diagram — the
+             subpage spec keeps ContinuumDiagram off this page (extra visual
+             claim is least honest on pricing); the trust glyph carries no
+             pricing claim. -->
+        <div class="hidden flex-shrink-0 pt-2 sm:block">
+          <AssuranceMark class="h-[96px] w-[96px] xl:h-[120px] xl:w-[120px]" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Proposed structure — not final -->
+    <section data-reveal class="bg-surface-muted py-16 sm:py-24">
+      <div class="container-content">
+        <h2 class="max-w-3xl text-3xl leading-tight sm:text-4xl">Proposed structure — not final<span class="heading-underline" aria-hidden="true"></span></h2>
+
+        <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <!-- Free -->
+          <div class="rounded-xl bg-surface p-6 shadow-sm transition-shadow hover:shadow-md">
+            <h3 class="font-semibold text-lg">Free</h3>
+            <p class="mt-2 text-3xl font-bold text-ink">$0</p>
+            <p class="mt-2 text-sm text-secondary">1 system, 1 regulation</p>
+            <p class="mt-4 text-body leading-relaxed">A proof-of-concept wedge for evaluating Continuum with non-institutional data.</p>
+          </div>
+
+          <!-- SME -->
+          <div class="rounded-xl bg-surface p-6 shadow-sm transition-shadow hover:shadow-md">
+            <h3 class="font-semibold text-lg">SME</h3>
+            <p class="mt-2 text-3xl font-bold leading-none text-secondary" aria-hidden="true">&mdash;</p>
+            <p class="mt-2 text-sm text-secondary">Not yet priced</p>
+            <p class="mt-2 text-sm text-secondary">Up to 3 systems, 2 regulations</p>
+            <p class="mt-4 text-body leading-relaxed">Growth startups, boutique financial institutions, and fintechs.</p>
+          </div>
+
+          <!-- Mid-market -->
+          <div class="rounded-xl bg-surface p-6 shadow-sm transition-shadow hover:shadow-md">
+            <h3 class="font-semibold text-lg">Mid-market</h3>
+            <p class="mt-2 text-3xl font-bold leading-none text-secondary" aria-hidden="true">&mdash;</p>
+            <p class="mt-2 text-sm text-secondary">Not yet priced</p>
+            <p class="mt-2 text-sm text-secondary">Up to 5 systems, 2 regulations</p>
+            <p class="mt-4 text-body leading-relaxed">Regional banks, mid-tier asset managers, and growth fintechs.</p>
+          </div>
+
+          <!-- Enterprise -->
+          <div class="rounded-xl bg-surface p-6 shadow-sm transition-shadow hover:shadow-md">
+            <h3 class="font-semibold text-lg">Enterprise</h3>
+            <p class="mt-2 text-3xl font-bold leading-none text-secondary" aria-hidden="true">&mdash;</p>
+            <p class="mt-2 text-sm text-secondary">Not yet priced</p>
+            <p class="mt-2 text-sm text-secondary">Unlimited systems, all regulations</p>
+            <p class="mt-4 text-body leading-relaxed">Tier 1 and Tier 2 banks and major asset managers.</p>
+          </div>
+        </div>
+
+        <p class="mt-8 max-w-3xl text-body leading-relaxed">These tiers and any figures are directional proposals pending Owner decision and customer validation. They are not a quote, an offer, or a commitment.</p>
+      </div>
+    </section>
+
+    <!-- What every tier includes -->
+    <section data-reveal class="py-16 sm:py-24">
+      <div class="container-content">
+        <h2 class="max-w-3xl text-3xl leading-tight sm:text-4xl">What every tier includes<span class="heading-underline" aria-hidden="true"></span></h2>
+
+        <ul class="mt-8 max-w-2xl space-y-3 text-body leading-relaxed">
+          <li class="flex items-start gap-3"><svg class="mt-1 h-4 w-4 flex-shrink-0 text-brand-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Continuous evidence collection and regulatory mapping within tier limits.</span></li>
+          <li class="flex items-start gap-3"><svg class="mt-1 h-4 w-4 flex-shrink-0 text-brand-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>The compliance dashboard.</span></li>
+          <li class="flex items-start gap-3"><svg class="mt-1 h-4 w-4 flex-shrink-0 text-brand-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Regulatory-ready reports with narrative explainability.</span></li>
+          <li class="flex items-start gap-3"><svg class="mt-1 h-4 w-4 flex-shrink-0 text-brand-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Human-validated control nodes.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CTA: Shaping the pricing (dark band) -->
+    <section data-reveal class="bg-brand-deep py-20">
+      <div class="container-content">
+        <h2 class="max-w-3xl text-3xl leading-tight text-white sm:text-4xl">Shaping the pricing<span class="heading-underline" aria-hidden="true"></span></h2>
+        <p class="mt-6 max-w-2xl text-lg text-white/80 leading-relaxed">If you are a financial institution with AI in production and you want early access or to help shape the tiers, get in touch via the <a href="/#stay-informed" class="text-brand-accent-reverse hover:underline">Stay Informed</a> form.</p>
+        <div class="mt-8">
+          <a href="/#stay-informed" class="inline-flex items-center justify-center rounded-md bg-brand-accent px-4 py-2 text-sm font-medium text-white hover:opacity-90 transition-opacity">
+            Get in touch →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer (R2: inherits DEFAULT_SITEMAP, rich) -->
+  <SiteFooter />
+
+  <!-- Back-to-top button: shows on scroll, smooth scrolls to top -->
+  <script>
+    (function() {
+      var btn = document.getElementById('back-to-top');
+      if (!btn) return;
+      /* v-pre */ btn.style.opacity = '0';
+      btn.style.pointerEvents = 'none';
+
+      window.addEventListener('scroll', (function(el) {
+        return function() {
+          if (window.scrollY > 400) {
+            el.style.opacity = '1';
+            el.style.pointerEvents = 'auto';
+          } else {
+            el.style.opacity = '0';
+            el.style.pointerEvents = 'none';
+          }
+        };
+      })(btn), { passive: true });
+
+      btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    })();
+  </script>
+
+</BaseLayout>

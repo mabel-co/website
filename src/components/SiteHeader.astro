@@ -1,0 +1,44 @@
+---
+import BrandMark from './BrandMark.astro';
+// R1 (design-spec-v3-subpages): one nav, everywhere. Subpages omit `links`
+// and inherit this array; the homepage passes this set plus its in-page anchors.
+export const DEFAULT_LINKS = [
+  { href: '/what-we-are', label: 'What We Are' },
+  { href: '/continuum', label: 'Continuum' },
+  { href: '/continuum/pricing', label: 'Pricing' },
+  { href: '/#stay-informed', label: 'Stay Informed' },
+];
+export interface Props {
+  links?: { href: string; label: string }[];
+}
+const { links = DEFAULT_LINKS } = Astro.props;
+---
+<header class="relative border-b border-rule">
+  <nav class="container-content flex items-center justify-between py-4">
+    <a href="/" aria-label="assurer.ai home" class="select-none font-sans font-bold leading-none tracking-[-0.02em] text-2xl">
+      <BrandMark class="mr-2 inline-block h-7 w-7 align-[-4px] text-brand-accent" />
+      <span class="text-brand-accent">assurer</span><span class="text-ink">.ai</span>
+    </a>
+    <div class="hidden space-x-6 text-sm font-medium md:block">
+      {links.map((link) => (
+        <a href={link.href} class="text-secondary hover:text-ink transition-colors">{link.label}</a>
+      ))}
+    </div>
+    <details class="md:hidden">
+      <summary class="mobile-nav-summary flex h-11 w-11 cursor-pointer items-center justify-center rounded-md text-ink hover:bg-ink/5">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+          <line x1="4" y1="8" x2="20" y2="8" />
+          <line x1="4" y1="16" x2="20" y2="16" />
+        </svg>
+        <span class="sr-only">Menu</span>
+      </summary>
+      <div class="absolute inset-x-0 top-full border-b border-rule bg-canvas">
+        <nav class="container-content flex flex-col divide-y divide-rule py-1">
+          {links.map((link) => (
+            <a href={link.href} class="py-3 text-base font-medium text-body hover:text-ink">{link.label}</a>
+          ))}
+        </nav>
+      </div>
+    </details>
+  </nav>
+</header>

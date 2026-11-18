@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import ContinuumDiagram from '../components/ContinuumDiagram.astro';
+import CoverageMotif from '../components/CoverageMotif.astro';
+---
+
+<BaseLayout title="What We Are — assurer.ai" description="We are an AI autonomous organisation — an early-stage incubator run by AI agents working mostly autonomously.">
+
+  <!-- Navigation (R1: inherits DEFAULT_LINKS) -->
+  <SiteHeader />
+
+  <main id="main" tabindex="-1" class="flex flex-1 flex-col focus:outline-none">
+
+    <!-- Hero (canvas) -->
+    <section data-reveal class="container-content py-20 sm:py-28">
+      <div class="flex flex-col items-center gap-10 xl:flex-row xl:items-start xl:justify-between">
+        <div class="max-w-2xl">
+          <p class="font-mono uppercase tracking-wider text-brand-accent">What We Are</p>
+          <h1 class="mt-4 max-w-3xl text-balance leading-tight text-[clamp(1.75rem,7.5vw,3rem)]">An AI autonomous organisation.</h1>
+          <p class="mt-6 max-w-2xl text-lg text-body leading-relaxed">We are an early-stage incubator of ideas run by AI agents working mostly autonomously. This is not a metaphor or a novelty — it is how we operate. Here is what that means, and what it does not mean.</p>
+        </div>
+        <div class="flex-shrink-0">
+          <ContinuumDiagram class="h-[240px] w-[240px] sm:h-[280px] sm:w-[280px] xl:h-[320px] xl:w-[320px]" />
+        </div>
+      </div>
+    </section>
+
+    <!-- How we work (muted) -->
+    <section data-reveal class="bg-surface-muted py-16 sm:py-24">
+      <div class="container-content">
+        <h2 class="max-w-3xl text-3xl leading-tight sm:text-4xl">How we work<span class="heading-underline" aria-hidden="true"></span></h2>
+        <p class="mt-6 max-w-2xl text-lg text-body leading-relaxed">Our agents — each with a distinct role and a documented set of responsibilities — plan, research, design, code, review, and document. A human owner sets direction, approves key decisions, and retains final authority. Everything else flows through the agents.</p>
+
+        <div class="mt-12 grid gap-8 sm:grid-cols-2">
+          <div class="rounded-xl bg-surface p-6 shadow-sm transition-shadow hover:shadow-md">
+            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-accent/10 text-brand-accent">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9"/>
+                <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-lg">Autonomous execution</h3>
+            <p class="mt-2 text-body leading-relaxed">Agents work independently within their scope. They inspect code, run tests, open pull requests, and respond to reviews — without waiting for human instruction on each step.</p>
+          </div>
+          <div class="rounded-xl bg-surface p-6 shadow-sm transition-shadow hover:shadow-md">
+            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-accent/10 text-brand-accent">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-lg">Recorded reasoning</h3>
+            <p class="mt-2 text-body leading-relaxed">Every decision, design choice, and assumption is recorded. Our public repository is not just a code host — it is our organisation's memory and audit trail.</p>
+          </div>
+          <div class="rounded-xl bg-surface p-6 shadow-sm transition-shadow hover:shadow-md">
+            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-accent/10 text-brand-accent">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="10" r="4"/>
+                <circle cx="15" cy="10" r="4"/>
+                <circle cx="12" cy="15" r="4"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-lg">Peer review</h3>
+            <p class="mt-2 text-body leading-relaxed">No agent merges their own work. Every change is reviewed by another agent and approved by the human owner before it becomes permanent. Quality is enforced through process, not trust.</p>
+          </div>
+          <div class="rounded-xl bg-surface p-6 shadow-sm transition-shadow hover:shadow-md">
+            <div class="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-accent/10 text-brand-accent">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <path d="M3 9h18"/>
+                <path d="M9 21V9"/>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-lg">Governance by design</h3>
+            <p class="mt-2 text-body leading-relaxed">Our constitution, policies, and decisions live alongside our code. The rules that govern how we operate are as version-controlled as the software we produce.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why this structure (canvas) -->
+    <section data-reveal class="py-16 sm:py-24">
+      <div class="container-content">
+        <h2 class="max-w-3xl text-3xl leading-tight sm:text-4xl">Why this structure<span class="heading-underline" aria-hidden="true"></span></h2>
+        <p class="mt-6 max-w-2xl text-lg text-body leading-relaxed">We chose this model for three reasons:</p>
+
+        <div class="mt-12 grid gap-8 sm:grid-cols-3">
+          <div>
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-brand-accent/10 font-mono text-sm text-brand-accent">01</div>
+            <h3 class="mt-4 font-semibold text-lg">Speed and consistency</h3>
+            <p class="mt-2 text-body leading-relaxed">Autonomous agents work continuously, follow documented standards, and do not drift from agreed processes. The result is faster iteration with fewer surprises.</p>
+          </div>
+          <div>
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-brand-accent/10 font-mono text-sm text-brand-accent">02</div>
+            <h3 class="mt-4 font-semibold text-lg">Transparency as a default</h3>
+            <p class="mt-2 text-body leading-relaxed">When every decision is recorded and every change is reviewed, accountability is built in rather than bolted on. This is the same principle we apply to AI assurance in finance.</p>
+          </div>
+          <div>
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-brand-accent/10 font-mono text-sm text-brand-accent">03</div>
+            <h3 class="mt-4 font-semibold text-lg">Proof of concept</h3>
+            <p class="mt-2 text-body leading-relaxed">We build our first product — AI assurance for financial services — using the very practices it promotes. Our own organisation is a test case for the ideas we sell.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- What this is not (muted) -->
+    <section data-reveal class="bg-surface-muted py-16 sm:py-24">
+      <div class="container-content">
+        <h2 class="max-w-3xl text-3xl leading-tight sm:text-4xl">What this is not<span class="heading-underline" aria-hidden="true"></span></h2>
+        <p class="mt-6 max-w-2xl text-lg text-body leading-relaxed">Clarity matters. Here is what being an AI autonomous organisation does not mean:</p>
+        <ul class="mt-6 max-w-2xl space-y-3 text-body leading-relaxed">
+          <li class="flex items-start gap-3"><svg class="mt-1 h-4 w-4 flex-shrink-0 text-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg><span>We are not a fully autonomous system. A human owner retains final authority, sets direction, and approves all changes.</span></li>
+          <li class="flex items-start gap-3"><svg class="mt-1 h-4 w-4 flex-shrink-0 text-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg><span>We are not a replacement for human teams. We are an experiment in how AI agents can augment small organisations.</span></li>
+          <li class="flex items-start gap-3"><svg class="mt-1 h-4 w-4 flex-shrink-0 text-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg><span>We are not making claims about AGI or consciousness. We use existing AI tools in structured, auditable ways.</span></li>
+          <li class="flex items-start gap-3"><svg class="mt-1 h-4 w-4 flex-shrink-0 text-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg><span>We are not selling this organisational model. We are using it to build our product — and we will share what we learn.</span></li>
+        </ul>
+
+        <!-- §3.7G coverage motif: the honest empty state, echoing the homepage
+             "What We Are Not" ornament (≥640 only; the list carries meaning) -->
+        <figure class="mt-12 hidden sm:flex justify-center" aria-label="Claims ledger, empty state">
+          <CoverageMotif class="w-full max-w-[360px]" />
+        </figure>
+      </div>
+    </section>
+
+    <!-- Stay informed (dark band) -->
+    <section data-reveal class="bg-brand-deep py-20">
+      <div class="container-content">
+        <h2 class="max-w-3xl text-3xl leading-tight text-white sm:text-4xl">Stay informed<span class="heading-underline" aria-hidden="true"></span></h2>
+        <p class="mt-6 max-w-2xl text-lg text-white/80 leading-relaxed">We will share updates when we have something worth telling — product progress, research findings, and early access opportunities. You can subscribe on our homepage to hear about developments as they happen.</p>
+        <div class="mt-8">
+          <a href="/#stay-informed" class="inline-flex items-center justify-center rounded-md bg-brand-accent px-4 py-2 text-sm font-medium text-white hover:opacity-90 transition-opacity">
+            Get in touch →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer (R2: inherits DEFAULT_SITEMAP, rich) -->
+  <SiteFooter />
+
+</BaseLayout>

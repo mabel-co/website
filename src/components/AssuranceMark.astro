@@ -1,0 +1,15 @@
+---
+// R-006 P3: quiet trust punctuation for document-page heroes — the homepage
+// trust-bar target glyph (index.astro "Continuous Regulatory Assurance")
+// reused inside a dotted halo ring. Decorative (aria-hidden): adjacent prose
+// carries all meaning; adds no product or pricing claim.
+const { class: className = 'h-[120px] w-[120px]' } = Astro.props;
+---
+<svg class={className} viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <circle cx="60" cy="60" r="56" stroke="#d6dee1" stroke-width="1.5" stroke-dasharray="5 7" fill="none" />
+  <g transform="translate(42 42) scale(1.5)" stroke="#0f6e56" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <circle cx="12" cy="12" r="9" />
+    <circle cx="12" cy="12" r="4.5" />
+    <circle cx="12" cy="12" r="1.5" fill="#0f6e56" stroke="none" />
+  </g>
+</svg>
