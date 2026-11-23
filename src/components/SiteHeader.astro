@@ -3,10 +3,10 @@ import BrandMark from './BrandMark.astro';
 // R1 (design-spec-v3-subpages): one nav, everywhere. Subpages omit `links`
 // and inherit this array; the homepage passes this set plus its in-page anchors.
 export const DEFAULT_LINKS = [
-  { href: '/what-we-are', label: 'What We Are' },
-  { href: '/continuum', label: 'Continuum' },
-  { href: '/continuum/pricing', label: 'Pricing' },
-  { href: '/#stay-informed', label: 'Stay Informed' },
+  { href: '/website/what-we-are', label: 'What We Are' },
+  { href: '/website/continuum', label: 'Continuum' },
+  { href: '/website/continuum/pricing', label: 'Pricing' },
+  { href: '/website/#stay-informed', label: 'Stay Informed' },
 ];
 export interface Props {
   links?: { href: string; label: string }[];
@@ -15,9 +15,9 @@ const { links = DEFAULT_LINKS } = Astro.props;
 ---
 <header class="relative border-b border-rule">
   <nav class="container-content flex items-center justify-between py-4">
-    <a href="/" aria-label="assurer.ai home" class="select-none font-sans font-bold leading-none tracking-[-0.02em] text-2xl">
+    <a href="/website/" aria-label="Assurer home" class="select-none font-sans font-bold leading-none tracking-[-0.02em] text-2xl">
       <BrandMark class="mr-2 inline-block h-7 w-7 align-[-4px] text-brand-accent" />
-      <span class="text-brand-accent">assurer</span><span class="text-ink">.ai</span>
+      <span class="text-brand-accent">Assurer</span>
     </a>
     <div class="hidden space-x-6 text-sm font-medium md:block">
       {links.map((link) => (

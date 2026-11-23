@@ -3,12 +3,12 @@ import BrandMark from './BrandMark.astro';
 // R2 (design-spec-v3-subpages): one footer, everywhere. Pages inherit this
 // sitemap; the homepage overrides with its anchor-augmented version.
 export const DEFAULT_SITEMAP = [
-  { href: '/', label: 'Home' },
-  { href: '/what-we-are', label: 'What We Are' },
-  { href: '/continuum', label: 'Continuum' },
-  { href: '/continuum/pricing', label: 'Pricing' },
-  { href: '/#stay-informed', label: 'Stay Informed' },
-  { href: '/privacy', label: 'Privacy' },
+  { href: '/website/', label: 'Home' },
+  { href: '/website/what-we-are', label: 'What We Are' },
+  { href: '/website/continuum', label: 'Continuum' },
+  { href: '/website/continuum/pricing', label: 'Pricing' },
+  { href: '/website/#stay-informed', label: 'Stay Informed' },
+  { href: '/website/privacy', label: 'Privacy' },
 ];
 export interface Props {
   variant?: 'rich' | 'simple';
@@ -27,15 +27,15 @@ const { variant = 'rich', sitemap = DEFAULT_SITEMAP, links = [] } = Astro.props;
         </div>
       </div>
       <div class="pt-4">
-        <a href="/" aria-label="assurer.ai home" class="font-sans text-2xl font-bold leading-none tracking-[-0.02em]">
+        <a href="/website/" aria-label="Assurer home" class="font-sans text-2xl font-bold leading-none tracking-[-0.02em]">
           <BrandMark class="mr-2 inline-block h-8 w-8 align-[-6px] text-brand-accent-reverse" />
-          <span class="text-brand-accent-reverse">assurer</span><span class="text-white">.ai</span>
+          <span class="text-brand-accent-reverse">Assurer</span>
         </a>
       </div>
       <div class="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div class="space-y-1">
           <p class="text-sm text-white/60">AI assurance for financial services.</p>
-          <p class="text-xs text-white/60">© 2026 assurer.ai. Product in development.</p>
+          <p class="text-xs text-white/60">© 2026 Assurer. Product in development.</p>
         </div>
         <button type="button" id="back-to-top" class="inline-flex items-center gap-1.5 rounded-md px-3 py-2 text-sm text-white/60 transition-colors hover:bg-white/10 hover:text-white" aria-label="Back to top" title="Back to top">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15" /></svg>
@@ -48,7 +48,7 @@ const { variant = 'rich', sitemap = DEFAULT_SITEMAP, links = [] } = Astro.props;
   <footer class="border-t border-rule py-8">
     <div class="container-content flex flex-col items-center justify-between gap-4 text-sm text-body sm:flex-row">
       <div class="space-y-1">
-        <p>© 2026 assurer.ai. AI assurance for financial services.</p>
+        <p>© 2026 Assurer. AI assurance for financial services.</p>
         <p class="text-secondary">Informational site — no services currently offered. Product in development.</p>
       </div>
       <div>

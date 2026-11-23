@@ -7,9 +7,9 @@
 //
 // This script is progressive enhancement: it hides the no-JS notice, submits
 // the same endpoint via fetch so the visitor stays on the page with inline
-// status, and falls back to mailto: if the endpoint is unreachable (e.g. the
-// handler route is not yet wired in front of the static site — see
-// _specs/brevo-form-handler.md §5). It never carries an API key.
+// status, and shows a GitHub pointer if the endpoint is unreachable (e.g. the
+// handler route is not yet wired in front of the static site). It never
+// carries an API key.
 (function () {
   'use strict';
 
@@ -68,15 +68,15 @@
       redirect: 'follow'
     }).then(function (response) {
       if (response.status === 404) {
-        // Handler route not wired yet (infra step, _specs §5.1): mailto keeps
-        // the lead path working until the deployment lands.
-        mailtoFallback(email, nameEl, messageEl);
+        // Handler route not wired yet (static Pages has no server): show the
+        // GitHub pointer until a form handler lands.
+        offlineFallback();
         return;
       }
       var match = /(?:^|[#&])form-status=([a-z]+)/i.exec(response.url || '');
       showStatus(response.ok && match ? match[1].toLowerCase() : 'error');
     }).catch(function () {
-      mailtoFallback(email, nameEl, messageEl);
+      offlineFallback();
     }).finally(function () {
       if (submitEl) {
         submitEl.disabled = false;
@@ -85,16 +85,10 @@
     });
   });
 
-  function mailtoFallback(email, nameEl, messageEl) {
-    var name = (nameEl && nameEl.value) ? nameEl.value.trim() : '';
-    var message = (messageEl && messageEl.value) ? messageEl.value.trim() : '';
-    var subject = 'assurer.ai \u2014 Visitor interest from ' + (name || email);
-    var body = 'From: ' + email + (name ? ' (' + name + ')' : '');
-    body += '\n\nInterested in:\n' + (message || '(not specified)');
-    body += '\n\n--\nSent from assurer.ai website';
-    window.location.href = 'mailto:hello@assurer.ai?subject='
-      + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-    setStatus('Opening your email client... If it does not open, please email hello@assurer.ai directly.', 'accent');
+  function offlineFallback() {
+    // The mailto: fallback was dropped when the custom domain was retired
+    // (dead address). Direct visitors to the public organisation page.
+    setStatus('Something went wrong. If this keeps happening, reach us on GitHub: https://github.com/mabel-co', 'error');
   }
 
   function showStatus(outcome) {
@@ -104,7 +98,7 @@
     } else if (outcome === 'duplicate') {
       setStatus('You are already subscribed — thanks!', 'accent');
     } else {
-      setStatus('Something went wrong. Please try again or email hello@assurer.ai.', 'error');
+      setStatus('Something went wrong. Please try again or reach us on GitHub: https://github.com/mabel-co.', 'error');
     }
   }
 

@@ -1,4 +1,4 @@
-# Repo-level targets for the public assurer.ai website (Astro).
+# Repo-level targets for the public Assurer website (Astro).
 # Run from the repository root.
 
 .PHONY: install check style style-check build preview clean

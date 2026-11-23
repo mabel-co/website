@@ -5,7 +5,7 @@ export interface Props {
   canonical?: string;
 }
 
-const { title, description = 'We check AI\'s work in real time, so the people building it can move fast without breaking trust.', canonical = 'https://www.assurer.ai/' } = Astro.props;
+const { title, description = 'We check AI\'s work in real time, so the people building it can move fast without breaking trust.', canonical = 'https://mabel-co.github.io/website/' } = Astro.props;
 ---
 
 <!doctype html>
@@ -23,13 +23,13 @@ const { title, description = 'We check AI\'s work in real time, so the people bu
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content="https://www.assurer.ai/og-default.png" />
+    <meta property="og:image" content="https://mabel-co.github.io/website/og-default.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://www.assurer.ai/og-default.png" />
+    <meta name="twitter:image" content="https://mabel-co.github.io/website/og-default.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -37,11 +37,11 @@ const { title, description = 'We check AI\'s work in real time, so the people bu
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" />
 
     <!-- Icons -->
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" media="(prefers-color-scheme: light)" />
-    <link rel="icon" href="/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" href="/website/favicon.svg" type="image/svg+xml" media="(prefers-color-scheme: light)" />
+    <link rel="icon" href="/website/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
 
     <!-- Styles -->
-    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/website/style.css" />
   </head>
   <body class="flex min-h-screen flex-col" style="scroll-behavior: smooth;">
     <!-- Q8 (#2525): skip link for keyboard users; every page's <main> carries

@@ -1,4 +1,4 @@
-# assurer.ai Website
+# Assurer Website
 
 > **Experimental — AI-generated, not human-validated.** This repository is
 > built by an AI agent team under human ownership. Its contents have **not
@@ -8,9 +8,9 @@
 > for its use. Nothing here is professional, compliance, or legal advice.
 > The licence terms (including warranty disclaimers) apply in full.
 
-Static site for [assurer.ai](https://www.assurer.ai) — "Real-time AI assurance
-for financial services." An Astro static build, served from **GitHub Pages** on
-the custom domain `www.assurer.ai`.
+Static site for the Assurer organisation — "Real-time AI assurance
+for financial services." An Astro static build, served from **GitHub Pages** at
+<https://mabel-co.github.io/website>.
 
 Working in this repo? Read [AGENTS.md](AGENTS.md) for layout, conventions and
 deployment rules.
@@ -36,8 +36,9 @@ make clean     # remove dist/, node_modules/, .astro/
 
 Merge to `main` builds and publishes via GitHub Pages
 (`.github/workflows/deploy-pages.yml`). The custom domain is pinned by
-`public/CNAME`; `astro.config.mjs` keeps `site: 'https://www.assurer.ai'` so
-canonical and Open Graph URLs are unchanged.
+No custom domain is used; `astro.config.mjs` sets
+`site: 'https://mabel-co.github.io/website'` and `base: '/website'` so canonical and
+Open Graph URLs resolve at the Pages path.
 
-Until DNS flips (Owner-side), the Pages build is previewable at the
-`github.io` deployment URL from the workflow's `deploy` job.
+Pages must be enabled for the repo (Owner-side) before the deploy job
+succeeds; until then builds upload the artifact but do not publish.

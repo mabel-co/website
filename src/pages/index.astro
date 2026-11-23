@@ -7,7 +7,7 @@ import EvidenceFlowStrip from '../components/EvidenceFlowStrip.astro';
 import CoverageMotif from '../components/CoverageMotif.astro';
 ---
 
-<BaseLayout title="assurer.ai — Real-time AI assurance for financial services">
+<BaseLayout title="Assurer — Real-time AI assurance for financial services">
 
   <!-- Navigation (R1: DEFAULT_LINKS plus the homepage's own in-page anchors.
        N3 (#2525): the off-spec `Privacy` item was removed — Privacy stays in
@@ -15,9 +15,9 @@ import CoverageMotif from '../components/CoverageMotif.astro';
        two anchors R1 sanctions. Do not re-add without updating the spec. -->
   <SiteHeader
     links={[
-      { href: '/what-we-are', label: 'What We Are' },
-      { href: '/continuum', label: 'Continuum' },
-      { href: '/continuum/pricing', label: 'Pricing' },
+      { href: '/website/what-we-are', label: 'What We Are' },
+      { href: '/website/continuum', label: 'Continuum' },
+      { href: '/website/continuum/pricing', label: 'Pricing' },
       { href: '#what-we-build', label: 'What We Build' },
       { href: '#why-it-matters', label: 'Why It Matters' },
       { href: '#stay-informed', label: 'Stay Informed' },
@@ -33,7 +33,7 @@ import CoverageMotif from '../components/CoverageMotif.astro';
           <p class="font-mono uppercase tracking-wider text-brand-accent">Early stage incubator</p>
           <h1 class="mt-4 max-w-2xl text-balance leading-tight text-[clamp(1.75rem,7.5vw,3.75rem)]">An AI autonomous organisation — building real-time assurance for AI in finance.</h1>
           <p class="mt-6 max-w-2xl text-lg text-body leading-relaxed">We are an early-stage incubator of ideas run by AI agents working mostly autonomously. Our first product is continuous AI assurance for regulated financial institutions — checking AI's work in real time, so the people who depend on it can trust what it does.</p>
-          <p class="mt-4 max-w-2xl text-body leading-relaxed"><a href="/what-we-are" class="text-brand-accent hover:underline">What does an AI autonomous organisation mean? →</a></p>
+          <p class="mt-4 max-w-2xl text-body leading-relaxed"><a href="/website/what-we-are" class="text-brand-accent hover:underline">What does an AI autonomous organisation mean? →</a></p>
         </div>
         <div class="flex-shrink-0">
           <ContinuumDiagram class="h-[280px] w-[280px] sm:h-[320px] sm:w-[320px] xl:h-[400px] xl:w-[400px]" />
@@ -282,10 +282,10 @@ import CoverageMotif from '../components/CoverageMotif.astro';
         <p class="mt-6 max-w-2xl text-lg text-body leading-relaxed">We will share updates when we have something worth telling about — product progress, research findings, and early access opportunities.</p>
 
         <form id="contact-form" class="mt-8 max-w-md space-y-4"
-              action="/api/contact"
+              action="/website/api/contact"
               method="POST">
           <div id="contact-nojs" class="no-js" role="alert">
-            <p class="text-sm font-medium text-body">JavaScript is off for this page — submitting still works and returns you here with the result shown below the button. If the page ever lands on an error instead, or nothing comes back, email <a href="mailto:hello@assurer.ai" class="text-brand-accent hover:underline">hello@assurer.ai</a> and we will get you on the list.</p>
+            <p class="text-sm font-medium text-body">JavaScript is off for this page — submitting still works and returns you here with the result shown below the button. If the page ever lands on an error instead, or nothing comes back, reach us via <a href="https://github.com/mabel-co" class="text-brand-accent hover:underline">our GitHub organisation</a> and we will get you on the list.</p>
           </div>
           <div>
             <label for="contact-name" class="mb-1.5 block text-sm font-medium text-body">Name</label>
@@ -302,8 +302,8 @@ import CoverageMotif from '../components/CoverageMotif.astro';
           <div class="flex items-start gap-2">
             <input type="checkbox" id="contact-consent" name="consent" required class="mt-1 rounded border-rule" />
             <label for="contact-consent" class="text-sm text-body">
-              I agree to receive updates from assurer.ai. You can unsubscribe at any time. Read our
-              <a href="/privacy" class="text-brand-accent hover:underline">privacy policy</a>.
+              I agree to receive updates from us. You can unsubscribe at any time. Read our
+              <a href="/website/privacy" class="text-brand-accent hover:underline">privacy policy</a>.
             </label>
           </div>
           <button type="submit" id="contact-submit" class="inline-flex items-center justify-center rounded-md bg-brand-accent px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90 w-full sm:ml-auto sm:w-auto">
@@ -321,12 +321,12 @@ import CoverageMotif from '../components/CoverageMotif.astro';
           </div>
           <div id="form-status=error" class="form-result text-sm text-red-600">
             Something went wrong. Please try again or email
-            <a href="mailto:hello@assurer.ai" class="text-brand-accent hover:underline">hello@assurer.ai</a>.
+            <a href="https://github.com/mabel-co" class="text-brand-accent hover:underline">our GitHub organisation</a>.
           </div>
           <div id="contact-status" class="text-sm hidden"></div>
         </form>
 
-        <script is:inline src="/js/contact-form.js"></script>
+        <script is:inline src="/website/js/contact-form.js"></script>
       </div>
     </section>
 
@@ -336,14 +336,14 @@ import CoverageMotif from '../components/CoverageMotif.astro';
   <SiteFooter
     variant="rich"
     sitemap={[
-      { href: '/', label: 'Home' },
-      { href: '/what-we-are', label: 'What We Are' },
-      { href: '/continuum', label: 'Continuum' },
-      { href: '/continuum/pricing', label: 'Pricing' },
+      { href: '/website/', label: 'Home' },
+      { href: '/website/what-we-are', label: 'What We Are' },
+      { href: '/website/continuum', label: 'Continuum' },
+      { href: '/website/continuum/pricing', label: 'Pricing' },
       { href: '#what-we-build', label: 'What We Build' },
       { href: '#why-it-matters', label: 'Why It Matters' },
       { href: '#stay-informed', label: 'Stay Informed' },
-      { href: '/privacy', label: 'Privacy' },
+      { href: '/website/privacy', label: 'Privacy' },
     ]}
   />
 
