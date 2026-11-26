@@ -1,7 +1,7 @@
 # Assurer website — working in this repo
 
 The public Assurer site: an Astro static build, no UI framework, no
-client-side JS beyond the contact-form script. This repo was migrated as-is
+client-side JS. This repo was migrated as-is
 from the `apps/website/` directory of the private development repository;
 commands that previously lived in its root Makefile are now targets of the
 Makefile here.

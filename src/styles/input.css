@@ -74,45 +74,6 @@
   outline-offset: 2px;
 }
 
-/* W6 (#2525): the no-JS notice inside the contact form. It is visible by
-   default (no-JS is exactly when it matters); contact-form.js hides it once
-   the enhancement is active. The `hidden` attribute is what the script uses,
-   so nothing extra is needed here beyond keeping it non-`display`-locked. */
-.no-js {
-  border: 1px solid var(--color-rule);
-  border-radius: 6px;
-  background-color: var(--color-surface-muted);
-  padding: 0.75rem 1rem;
-}
-
-.no-js[hidden] {
-  display: none;
-}
-
-/* W6.1 remediation (#2936): static no-JS result blocks. The handler's 303
-   lands the visitor back here with #form-status=<ok|duplicate|error>; a HTML
-   fragment anchor matches the element whose id is exactly that string, so
-   :target alone reveals the right block with zero JavaScript. Hidden by
-   default; only the targeted block displays. The JS path leaves the hash in
-   place, so a JS visitor returning to the URL sees the same honest text in
-   both renderers. */
-.form-result {
-  display: none;
-}
-
-.form-result:target {
-  border: 1px solid var(--color-rule);
-  border-radius: 6px;
-  background-color: var(--color-surface-muted);
-  padding: 0.75rem 1rem;
-  display: block;
-}
-
-.form-result:target.text-red-600 {
-  background-color: transparent;
-  border-color: var(--color-state-fail);
-}
-
 .heading-underline {
   display: block;
   margin-top: 0.25rem;
